@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.menu">
+  <grid id="27dc6" binding="backPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="819" height="430"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="38938" class="javax.swing.JButton" binding="serverButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Server"/>
+        </properties>
+      </component>
+      <component id="d9771" class="javax.swing.JButton" binding="RSAAlgorithmButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="RSA Algorithm"/>
+        </properties>
+      </component>
+      <component id="a28a0" class="javax.swing.JTextPane" binding="paraPanel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="750" height="750"/>
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Please expand! Please expand!&#10;Insutrctions:&#10;&#10;MAX CHAR LENGTH FOR MESSAGE: 2 &#10;BIT LENGTH FOR BIG INTEGER: 8 (0-256 in Big Int)&#10;&#10;To 'break' the RSA algorithm you can enter more than 2 characters becasue we have limited it to 8bit, this therefore throws the decryption out of the algorithm and doesn't decipher correctly. &#10;&#10;When Alice first sends a message to Bob, Charlies text is what everyone can see, the CIPHER text. However, if you click on the 'Charlie' button you can see after Brute force and factorisation that charlie is able to find p and q, and decipher the text correctly. Hacker.java shows all the code on how the factorisation and brute force was coded. &#10;&#10;READ ME:&#10;&#10;Welcome to the Computer Security coursework from Ahmed Al-waili, Mahmudul Fakrul, Taha Zachoni. This paragraph just stats a few things that the real RSA Encryption does that we do not do, for example RSA uses a minimum of 4,096; however we of course do not, as we are here to prove our experience with RSA and also the proof of reversal with Charlie trying to intercept the messages. Above, you can see the bit lengths we use for our Big Integer variables, we have the ability to reverse this and make it much larger and hard for charlie to intercept - 30 minutes until my laptop gave up with 512 bit length. Above you can also see the pattern we used for Charlie to intercept the messages, this will all be in the documentation .pdf you can find in the submission .zip folder. "/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
