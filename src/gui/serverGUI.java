@@ -13,10 +13,13 @@ public class serverGUI {
     private JTextField aliceInput;
     private JButton sendToBobButton;
     private JLabel publicKeyLabel;
-    private JTextPane bobRec;
-    private JTextPane aliceRec;
-    private JTextPane cipherRec;
+    private JTextPane bobN;
+    private JTextPane aliceN;
+    private JTextPane cipherN;
     private JLabel recName;
+    private JTextPane bobN2;
+    private JTextPane cipherN2;
+    private JTextPane aliceN2;
 
     RSA aliceRSA = new RSA();
     RSA bobRSA = new RSA();
@@ -51,13 +54,36 @@ public class serverGUI {
 
         BigInteger[] arr = p1.getPartnerKey(ser, p2);
 
-        BigInteger[] bigArr = ser.sign(p1, p2);
+        BigInteger[] bigArr = ser.sign(p1, p2);//server signs for alice
+
+        byte[] en = p1.sendNounce(p2);
+        ///alice front
+        aliceN.setText(p1.viewNounce());
+
+        bobN.setText(new String(en));
+
+        byte[] a = p2.decryptNounce(p1);
+//        System.out.println("DE" + new String(a));
+        cipherN.setText(new String(a));
+
+
+        byte[] en2 = p2.sendNounce(p1);
+        ///alice front
+        aliceN2.setText(p2.viewNounce());
+
+        bobN2.setText(new String(en2));
+
+        byte[] a2 = p1.decryptNounce(p2);
+//        System.out.println("DE" + new String(a));
+        cipherN2.setText(new String(a2));
 
         BigInteger tempE = p1.verify(ser, bigArr[0]);
 
         denm = p1.serverEncrypt(ser, message.getBytes(), tempE, arr[1]);//encrypt
 
         decipher = p2.rsa.dencrypt(denm);
+
+
 
     }
 

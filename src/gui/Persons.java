@@ -1,14 +1,20 @@
 package gui;
 
 import java.math.BigInteger;
+import java.util.Random;
+
 
 public class Persons {
 
     public RSA rsa;
-    BigInteger nounce;
+    String nounce;
+    String partnerNounce;
+    String[] nounceArr = {"abcd","edfg","hijk","lmno","pqrs","tuvw","xyza","aabb","bbaa","baab",};
+    int rnd = new Random().nextInt(9);
 
     Persons(RSA rsa){
         this.rsa = rsa;
+        nounce = nounceArr[rnd];
     }
 
     public String getPublicKey(){
@@ -39,11 +45,34 @@ public class Persons {
 
     public BigInteger verify(Server s, BigInteger e){//needs to be signed
         BigInteger temp = e.modPow(rsa.d,  rsa.n);
-//        System.out.println("RSA n " + rsa.n.toString());
+//        System.out.println("RSA n " + rsa.n);
         return temp;
     }
 
-    public BigInteger sendNounce(Persons to){
-        return null;
+    public String viewNounce(){
+        return nounce;
+    }
+
+    public byte[] getNounce(){
+        return nounce.getBytes();
+    }
+
+    public byte[] sendNounce(Persons to){
+        System.out.println(nounce);
+        byte[] b = to.rsa.encrypt(nounce.getBytes());
+
+//        System.out.println("EN " + new String(b));
+
+        to.setPartnerNounce(b);
+        return nounce.getBytes();
+    }
+
+    public void setPartnerNounce(byte[] b){
+        partnerNounce = new String(b);
+    }
+
+    public byte[] decryptNounce(Persons from){
+        byte[] b = partnerNounce.getBytes();
+        return rsa.dencrypt(b);
     }
 }
