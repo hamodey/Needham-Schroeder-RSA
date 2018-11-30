@@ -50,38 +50,51 @@ public class serverGUI {
         });
     }
 
+
+    //this method below allows any message sent to any person that is inistialised
+    //hence why this is a method and can be called in the main function
     public void messaging(String message, Persons p1 , Persons p2, Server ser){
 
+
+        //get the partner public key by asking the server
         BigInteger[] arr = p1.getPartnerKey(ser, p2);
 
+        //server then signs the public key and sends it back to the user p1
         BigInteger[] bigArr = ser.sign(p1, p2);//server signs for alice
 
+        //person 1 sends to person2 encrypted nounce with signed public key
         byte[] en = p1.sendNounce(p2);
         ///alice front
         aliceN.setText(p1.viewNounce());
 
         bobN.setText(new String(en));
 
+        //decryption of nounce
         byte[] a = p2.decryptNounce(p1);
 //        System.out.println("DE" + new String(a));
         cipherN.setText(new String(a));
 
 
+        //person 2 sends back a nounce wiht person 1
         byte[] en2 = p2.sendNounce(p1);
         ///alice front
         aliceN2.setText(p2.viewNounce());
 
         bobN2.setText(new String(en2));
 
+        //decrypts it
         byte[] a2 = p1.decryptNounce(p2);
 //        System.out.println("DE" + new String(a));
         cipherN2.setText(new String(a2));
 
         BigInteger tempE = p1.verify(ser, bigArr[0]);
 
+        //decrtpyes the nounces and also the messages
         denm = p1.serverEncrypt(ser, message.getBytes(), tempE, arr[1]);//encrypt
 
+        //message is shown
         decipher = p2.rsa.dencrypt(denm);
+
 
 
 
